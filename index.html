@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <script src="js/script.js" defer></script>
+    <title>AnimeRequester</title>
 </head>
-<body>
-    <h1>Hello, World!</h1>
+<i>
+    <h1>ANIME REQUESTER</h1>
+
+    <div id="limit">
+    <form id = "requestForm">
+        <div class = "search">
+            <label for="searchType">Choisissez un type de recherche:</label>
+            <select id = "searchType" name="searchType" required>
+                <option value="titleSearch">Recherche par titre</option>
+                <option value="IDSearch">Recherche par ID</option>
+                <option value="rankSearch">Recherche par rang</option>
+                <option value="genreSearch">Recherche par genre</option>
+                <option value="genreList">Liste des genres</option>
+            </select>
+            <!--<input type="submit" id="searchType" name="searchType" required>-->
+        </div>
+        <div class = "search">
+            <label for="param">Paramètres:</label>
+            <input type="text" id="param" name="param" required>
+        </div>
+        <div id = "buttonSection">
+            <button type="submit" id = "search">Rechercher</button>
+            <button type="button" id = "reset">Réinitialiser</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
