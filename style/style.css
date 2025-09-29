@@ -5,6 +5,7 @@ body{
 
 h1{
     text-align: center;
+    margin-top: 1em;
 }
 
 form{
@@ -17,7 +18,7 @@ form{
     border: 1px solid #9f9f9f;
     background-color: #ffffff;
     border-radius: 14px;
-    width: 50%;
+    width: 55%;
     margin-left: auto;
     margin-right: auto;
     padding: 2em;
@@ -29,10 +30,17 @@ form{
     align-items: center;
     gap: 15px;
     margin-bottom: 1em;
+    width: 100%;
+}
+
+.search label {
+    width: 250px;
+    text-align: left;
+    flex-shrink: 0;
 }
 
 .search input, .search select{
-    display: flex;
+    flex: 1;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -41,7 +49,9 @@ form{
 #buttonSection{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1em;
+    width: 100%;
 }
 
 #buttonSection button{
@@ -49,7 +59,8 @@ form{
     color : white;
     border : 1px solid rgb(0, 0, 0);
     border-radius: 5px;
-    padding : 0.5em 8em;
+    width : 200px;
+    height : 30px;
     cursor : pointer;
 }
 
