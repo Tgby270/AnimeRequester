@@ -207,15 +207,23 @@ data.forEach(anime => {
     imgElement.src = anime.image;
     imgElement.alt = anime.title;
 
+    imgElement.className = "anime_img";
+
+
     liElement.appendChild(imgElement);
 
+    liElement.appendChild(document.createElement("br"));
+
     liElement.appendChild(document.createTextNode(
-        "\n\n\nTitre: " + anime.title +" | Rang: " + anime.ranking +
+        "Titre: " + anime.title +" | Rang: " + anime.ranking +
         "\nAnnée: " + (anime.year || "") +
         "\nNote: " + (anime.rating || "") +
         "\nGenre(s): " + (anime.genres ? anime.genres.join(", ") : "") +
         "\nSynopsis: " + (anime.synopsis || "")
+    
     ));
+
+    
 
     ulElement.appendChild(liElement);
 });
