@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css" type="text/css">
-    <script src="js/script.js" defer></script>
+    <script src="js/byTitle.js" defer></script>
     <title>AnimeRequester</title>
 </head>
     <h1>ANIME REQUESTER</h1>
@@ -14,6 +14,7 @@
         <div class = "search">
             <label for="searchType">Choisissez un type de recherche:</label>
             <select id = "searchType" name="searchType" required>
+                <option value="" disabled selected>Sélectionnez un type de recherche</option>
                 <option value="titleSearch">Recherche par titre</option>
                 <option value="IDSearch">Recherche par ID</option>
                 <option value="rankSearch">Recherche par rang</option>
@@ -31,7 +32,23 @@
         </div>
     </form>
 
-    <ul id = "animeList"></ul>
+    <template id="animeTemplate">
+        <div id="animeShow">
+            <div id="animeCard">
+                <h2 class="animeTitle"></h2>
+                <img class="animeImage" src="" alt="Anime Image">
+                <div id = "details">
+                    <p class="animeGenre"></p>
+                    <p class="animeRank"></p>
+                    <p class="animeID"></p>
+                </div>
+            </div>
+            <div id="animeDescription">
+                <p class="animeDescription"></p>
+            </div>
+        </div>
+
+    </template>
 </div>
 </body>
 </html>
