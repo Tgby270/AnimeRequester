@@ -1,11 +1,11 @@
-/*const url = 'https://anime-db.p.rapidapi.com/anime?page=1&size=10&sortBy=ranking';
+url = 'https://anime-db.p.rapidapi.com/anime?page=1&size=10&sortBy=ranking';
 const options = {
 	method: 'GET',
 	headers: {
 		'x-rapidapi-key': '2d600423ccmsheb8f4b3fe85e2fep189b86jsn255f14bc55e0',
 		'x-rapidapi-host': 'anime-db.p.rapidapi.com'
 	}
-};*/
+};
 
 const data =   
      [
@@ -170,36 +170,10 @@ const data =
       "type": "TV"
     }
   ]
+
+
+
 /*
-try {
-    UlElement = document.getElementById("animeList");
-
-	fetch(url, options)
-        .then(response => response.json())
-        .then(response => {
-            //console.log(data);
-            for(const anime of response.data) {
-                console.log("Titre: " + anime.title + " | Rang: " + anime.ranking);
-               
-                const liElement = document.createElement("li");
-                const imgElement = document.createElement("img");
-                imgElement.src = anime.image;
-                liElement.appendChild(imgElement);
-                liElement.innerText =
-                " \n Titre: " + anime.title + " | Rang: " + anime.ranking + 
-                " \n Année: " + anime.year + 
-                " \n Note: " + anime.rating + 
-                " \n Genre(s): " + anime.genres + 
-                " \n Synopsis: " + anime.synopsis;
-
-                UlElement.appendChild(liElement);
-            }
-        });
-} catch (error) {
-	console.error(error);
-}
-*/
-
 const ulElement = document.getElementById("animeList");
 data.forEach(anime => {
     const liElement = document.createElement("li");
@@ -226,4 +200,110 @@ data.forEach(anime => {
     
 
     ulElement.appendChild(liElement);
-});
+});*/
+
+
+
+
+function changeURLAtRank(researchNumber) {
+  console.log("Initial URL: " + url.toString());
+  url = "https://anime-db.p.rapidapi.com/anime/by-ranking/" + researchNumber;
+  console.log("URL changed to: " + url.toString());
+}
+
+//-------------------------------------------------------------------------------------------//
+
+function showAnimeAtRank(_researchNumber) {
+  try {
+	  fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+          //console.log("API Response:", data);
+          
+          // Pour une recherche par rang, l'API retourne directement un objet anime
+          // Donc on crée un tableau avec cet objet
+          let tabtemp = Array.isArray(data) ? data : [data];
+          
+          tabtemp.forEach(anime => {
+
+            const animeShow = document.getElementById("animeShow");
+
+            if( animeShow ){
+              document.body.removeChild(animeShow); 
+            }
+           
+
+            const template = document.getElementById("animeTemplate").content.cloneNode(true);
+
+            template.querySelector("#animeTitle").textContent = anime.title;
+            template.querySelector("#animeImage").src = anime.image;
+            template.querySelector("#animeDescription").innerHTML = "<b>Synopsis: </b></br>" + anime.synopsis;
+            if(anime.genres.length === 0) {
+              template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b>N/A";
+            } 
+            else {
+              template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b></br>" + anime.genres.join(", ");
+            }
+            template.querySelector("#animeRank").innerHTML = "<b>Rank: </b>" + anime.ranking;
+            template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + anime._id;
+
+            document.body.appendChild(template);
+          }
+        )}
+      );
+  } catch (error) {
+	  console.error(error);
+  }
+
+}
+
+//-------------------------------------------------------------------------------------------//
+
+function showAnimeByRank() {
+  try {
+	  fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+          
+          //console.log("API Response:", data);
+          // Pour une recherche par rang, l'API retourne directement un objet anime
+          // Donc on crée un tableau avec cet objet
+ 
+          data.data.forEach(anime => {
+            const template = document.getElementById("animeTemplate").content.cloneNode(true);
+
+
+
+            template.querySelector("#animeTitle").textContent = anime.title;
+            template.querySelector("#animeImage").src = anime.image;
+            template.querySelector("#animeDescription").innerHTML = "<b>Synopsis: </b></br>" + anime.synopsis;
+            /*if(anime.genres.length === 0) {
+              template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b>N/A";
+            } 
+            else {
+              template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b></br>" + anime.genres.join(", ");
+            }*/
+            template.querySelector("#animeRank").innerHTML = "<b>Rank: </b>" + anime.ranking;
+            template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + anime._id;
+
+            document.body.appendChild(template);
+          }
+        )
+        console.log("finished");
+      }
+    );
+  } catch (error) {
+	  console.error(error);
+  }
+
+}
+
+function showRank(researchNumber){
+  if(researchNumber === undefined || researchNumber === "" || researchNumber === null ){
+    console.log("No research number provided, using default URL: " + url.toString());
+    showAnimeByRank();
+  }else {
+    changeURLAtRank(researchNumber);
+    showAnimeAtRank(researchNumber);
+  }
+}
