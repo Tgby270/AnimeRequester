@@ -123,10 +123,24 @@ form{
     margin-bottom: 50px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 950px) {
     #animeDescription {
         max-height: 200px;
         overflow: auto;
+    }
+
+    #animeShow {
+        width: 80%;
+        padding: 1em;
+    }
+
+    form{
+        width: 80%;
+        padding : 1em;
+    }
+
+    .inrow{
+        flex-direction: column;
     }
 }
 

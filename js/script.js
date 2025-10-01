@@ -11,7 +11,8 @@ form.addEventListener("submit", (event) => {
     
     switch(searchType){
         case "titleSearch":
-            // hassoul
+            console.log("Title search for: " + searchValue);
+            showTitle(searchValue);
             break;
         case "IDSearch":
             // hassoul
