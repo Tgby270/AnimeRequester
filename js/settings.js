@@ -28,13 +28,18 @@ document.getElementById("themeToggle").addEventListener("click", (e) => {
 document.getElementById("languageToggle").addEventListener("click", (e) => {
     e.preventDefault();
     
-    if(isDarkMode) {//si dejas dark mode mettre en light mode
+    if(lightstatus == "LIGHT") {//si dejas dark mode mettre en light mode
         
+
+        
+        lightstatus = "DARK";
     } else {//si pas dark mode mettre en dark mode
 
+
+
+        lightstatus = "LIGHT";
     }
 
-    isDarkMode = !isDarkMode;
     alert("Changement de langue - À implémenter");
     dropdown.classList.remove("active");
 });
