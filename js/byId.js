@@ -1,5 +1,5 @@
 function IDresearch(id){
-    const urlById = 'https://anime-db.p.rapidapi.com/anime/by-id/' + searchValue;
+    const urlById = 'https://anime-db.p.rapidapi.com/anime/by-id/' + id;
     const options = {
         method: 'GET',
         headers: {
