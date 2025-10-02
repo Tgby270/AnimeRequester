@@ -3,6 +3,81 @@ body{
     background-color: #f4f4f4;
 }
 
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-btn:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 100px;
+    max-width: 150px;
+    white-space: nowrap;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    color: #333 !important;
+    padding: 12px 16px;
+    text-decoration: none !important;
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #e9ecef !important;
+    color: #007bff !important;
+}
+
+.dropdown-content a:visited,
+.dropdown-content a:link {
+    color: #333 !important;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+
+
+
 h1{
     text-align: center;
     margin-top: 1em;
@@ -130,3 +205,7 @@ form{
     }
 }
 
+#settingsButton{
+    color : rgb(255, 255, 255);
+    background-color : rgb(129, 129, 245);
+}
