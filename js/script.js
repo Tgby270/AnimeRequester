@@ -15,7 +15,8 @@ form.addEventListener("submit", (event) => {
             showTitle(searchValue);
             break;
         case "IDSearch":
-            // hassoul
+            console.log("Title search for: " + searchValue);
+            IDresearch(searchValue);
             break;
         case "rankSearch":
             console.log("Rank search for: " + searchValue);
