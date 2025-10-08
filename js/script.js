@@ -15,7 +15,7 @@ form.addEventListener("submit", (event) => {
     switch(searchType){
         case "titleSearch":
             console.log("Title search for: " + searchValue);
-            showTitle(searchValue, appi_key);
+            showTitle(searchValue, api_key);
             break;
         case "IDSearch":
             console.log("Title search for: " + searchValue);

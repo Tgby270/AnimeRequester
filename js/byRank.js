@@ -1,4 +1,4 @@
-
+let options;
 
 const data =   
      [
@@ -220,7 +220,7 @@ function showAnimeAtRank(_researchNumber) {
 
 //-------------------------------------------------------------------------------------------//
 
-function showAnimeByRank() {
+function showAnimeByRank(options) {
 
   try {
 	  fetch(url, options)
@@ -233,8 +233,6 @@ function showAnimeByRank() {
  
           data.data.forEach(anime => {
             const template = document.getElementById("animeTemplate").content.cloneNode(true);
-
-
 
             template.querySelector("#animeTitle").textContent = anime.title;
             template.querySelector("#animeImage").src = anime.image;
@@ -264,7 +262,7 @@ function showAnimeByRank() {
 function showRank(researchNumber, api_key){
 
   url = 'https://anime-db.p.rapidapi.com/anime?page=1&size=10&sortBy=ranking';
-  const options = {
+  options = {
     method: 'GET',
     headers: {
       'x-rapidapi-key': api_key,
@@ -274,7 +272,7 @@ function showRank(researchNumber, api_key){
 
   if(researchNumber === undefined || researchNumber === "" || researchNumber === null ){
     console.log("No research number provided, using default URL: " + url.toString());
-    showAnimeByRank();
+    showAnimeByRank(options);
   }else {
     changeURLAtRank(researchNumber);
     showAnimeAtRank(researchNumber);
