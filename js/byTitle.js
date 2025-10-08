@@ -51,11 +51,13 @@ function showAnimeAtTitle(researchName) {
             template.querySelector("#animeGenre").innerHTML =
               "<b>Genres: </b></br>" + anime.genres.join(", ");
           }
-          console.log(anime.genres);
           template.querySelector("#animeRank").innerHTML =
             "<b>Rank: </b>" + anime.ranking;
           template.querySelector("#animeID").innerHTML =
             "<b>ID: </b>" + anime._id;
+          
+          template.querySelector("#nbEpisodes").innerHTML =
+            "<b>Number of Episodes: </b>" + anime.episodes;
 
           document.body.appendChild(template);
         });

@@ -285,7 +285,8 @@ function showAnimeByRank() {
             }*/
             template.querySelector("#animeRank").innerHTML = "<b>Rank: </b>" + anime.ranking;
             template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + anime._id;
-
+            template.querySelector("#nbEpisodes").innerHTML =
+            "<b>Number of Episodes: </b>" + anime.episodes;
             document.body.appendChild(template);
           }
         )
