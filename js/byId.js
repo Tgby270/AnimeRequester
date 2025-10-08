@@ -1,9 +1,9 @@
-function IDresearch(id) {
+function IDresearch(id, api_key) {
   const urlById = "https://anime-db.p.rapidapi.com/anime/by-id/" + id;
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "ea73e965f1mshdf06bb0c4f075d8p14f93djsne0faf0bc3c19",
+      "x-rapidapi-key": api_key,
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
     },
   };

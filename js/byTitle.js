@@ -1,4 +1,4 @@
-function showAnimeAtTitle(researchName) {
+function showAnimeAtTitle(researchName, api_key) {
   // Properly encode the search parameter to handle spaces and special characters
   const encodedSearch = encodeURIComponent(researchName);
   const url = `https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=${encodedSearch}&sortBy=ranking&sortOrder=asc`;
@@ -7,7 +7,7 @@ function showAnimeAtTitle(researchName) {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "c74efe75ecmsh9faeb3881b181bbp1ad151jsn0f8c61a1d5e1",
+      "x-rapidapi-key": api_key,
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
     },
   };
@@ -72,7 +72,7 @@ function showAnimeAtTitle(researchName) {
   }
 }
 
-function showTitle(researchName) {
+function showTitle(researchName, api_key) {
   if (
     researchName === undefined ||
     researchName === "" ||
@@ -82,6 +82,6 @@ function showTitle(researchName) {
       "No research name provided, using default URL: " + url.toString()
     );
   } else {
-    showAnimeAtTitle(researchName);
+    showAnimeAtTitle(researchName, api_key);
   }
 }

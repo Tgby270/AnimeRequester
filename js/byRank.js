@@ -1,11 +1,4 @@
-url = 'https://anime-db.p.rapidapi.com/anime?page=1&size=10&sortBy=ranking';
-const options = {
-	method: 'GET',
-	headers: {
-		'x-rapidapi-key': '2d600423ccmsheb8f4b3fe85e2fep189b86jsn255f14bc55e0',
-		'x-rapidapi-host': 'anime-db.p.rapidapi.com'
-	}
-};
+
 
 const data =   
      [
@@ -172,39 +165,6 @@ const data =
   ]
 
 
-
-/*
-const ulElement = document.getElementById("animeList");
-data.forEach(anime => {
-    const liElement = document.createElement("li");
-    const imgElement = document.createElement("img");
-    imgElement.src = anime.image;
-    imgElement.alt = anime.title;
-
-    imgElement.className = "anime_img";
-
-
-    liElement.appendChild(imgElement);
-
-    liElement.appendChild(document.createElement("br"));
-
-    liElement.appendChild(document.createTextNode(
-        "Titre: " + anime.title +" | Rang: " + anime.ranking +
-        "\nAnnée: " + (anime.year || "") +
-        "\nNote: " + (anime.rating || "") +
-        "\nGenre(s): " + (anime.genres ? anime.genres.join(", ") : "") +
-        "\nSynopsis: " + (anime.synopsis || "")
-    
-    ));
-
-    
-
-    ulElement.appendChild(liElement);
-});*/
-
-
-
-
 function changeURLAtRank(researchNumber) {
   console.log("Initial URL: " + url.toString());
   url = "https://anime-db.p.rapidapi.com/anime/by-ranking/" + researchNumber;
@@ -214,6 +174,7 @@ function changeURLAtRank(researchNumber) {
 //-------------------------------------------------------------------------------------------//
 
 function showAnimeAtRank(_researchNumber) {
+
   try {
 	  fetch(url, options)
         .then(response => response.json())
@@ -260,6 +221,7 @@ function showAnimeAtRank(_researchNumber) {
 //-------------------------------------------------------------------------------------------//
 
 function showAnimeByRank() {
+
   try {
 	  fetch(url, options)
         .then(response => response.json())
@@ -299,7 +261,17 @@ function showAnimeByRank() {
 
 }
 
-function showRank(researchNumber){
+function showRank(researchNumber, api_key){
+
+  url = 'https://anime-db.p.rapidapi.com/anime?page=1&size=10&sortBy=ranking';
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': api_key,
+      'x-rapidapi-host': 'anime-db.p.rapidapi.com'
+    }
+  };
+
   if(researchNumber === undefined || researchNumber === "" || researchNumber === null ){
     console.log("No research number provided, using default URL: " + url.toString());
     showAnimeByRank();
