@@ -45,6 +45,7 @@ function showId(data){
   template.querySelector("#animeRank").innerHTML =
     "<b>Rank: </b>" + data.ranking;
   template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + data._id;
-
+  template.querySelector("#nbEpisodes").innerHTML =
+  "<b>Number of Episodes: </b>" + data.episodes;
   document.body.appendChild(template);
 }
