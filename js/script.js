@@ -5,8 +5,15 @@ const reset = document.getElementById("reset");
 form.addEventListener("submit", (event) => {
     event.preventDefault(); // Empêche le rechargement de la page
     
-    //request api key
-    api_key = prompt("Veuillez entrer votre clé API:");
+   
+
+    if(window.sessionStorage.getItem("api_key") == null){
+        console.log("No API key found in session storage, setting new key.");
+         //request api key
+        api_key = prompt("Veuillez entrer votre clé API:");
+        window.sessionStorage.setItem("api_key", api_key);
+        console.log("API key stored : " + window.sessionStorage.getItem("api_key"));
+    }
 
     const formData = new FormData(form);
     const searchType = formData.get("searchType");
@@ -15,15 +22,15 @@ form.addEventListener("submit", (event) => {
     switch(searchType){
         case "titleSearch":
             console.log("Title search for: " + searchValue);
-            showTitle(searchValue, api_key);
+            showTitle(searchValue, window.sessionStorage.getItem("api_key"));
             break;
         case "IDSearch":
             console.log("Title search for: " + searchValue);
-            IDresearch(searchValue, api_key);
+            IDresearch(searchValue, window.sessionStorage.getItem("api_key"));
             break;
         case "rankSearch":
             console.log("Rank search for: " + searchValue);
-            showRank(searchValue, api_key);
+            showRank(searchValue, window.sessionStorage.getItem("api_key"));
             break;
         case "genreSearch":
             // hassoul

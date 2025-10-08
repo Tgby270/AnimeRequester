@@ -261,6 +261,7 @@ function showAnimeByRank(options) {
 
 function showRank(researchNumber, api_key){
 
+
   url = 'https://anime-db.p.rapidapi.com/anime?page=1&size=10&sortBy=ranking';
   options = {
     method: 'GET',
@@ -269,6 +270,8 @@ function showRank(researchNumber, api_key){
       'x-rapidapi-host': 'anime-db.p.rapidapi.com'
     }
   };
+
+  
 
   if(researchNumber === undefined || researchNumber === "" || researchNumber === null ){
     console.log("No research number provided, using default URL: " + url.toString());
