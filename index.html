@@ -11,7 +11,7 @@
     <script src="JS/settings.js" defer></script>
     <script src="js/byTitle.js" defer></script>
     <script src="js/byID.js" defer></script>
-    <!--<script src="js/getGenre.js" defer></script>-->
+    <script src="js/getGenre.js" defer></script>
     <title>AnimeRequester</title>
 </head>
 
@@ -42,20 +42,24 @@
                 <option value="genreSearch">Recherche par genre</option>
                 <option value="genreList">Liste des genres</option>
             </select>
-
-            <template id="genreTemplate">
-                <div id="genreShow">
-                    <input type="checkbox" id="check" name="check" required>
-                    <label for="checkbox"></label>
-                </div>
-            </template>
         </div>
 
         <div class="search">
             <label for="param">Paramètres:</label>
-            <input type="text" id="param" name="param" required>
+            <input type="text" id="param" name="param">
         </div>
 
+        <div class="search" id="genreContainer">
+            <label id="genresLab" style="display: none;">Genres:</label>
+            <div id="genrediv" class="genre-grid"></div>
+        </div>
+
+        <template id="genreTemplate">
+            <div class="genre-item">
+                <input type="checkbox" class="genre-checkbox">
+                <label class="genre-label"></label>
+            </div>
+        </template>
 
         <div id="buttonSection">
             <button type="submit" id="search">Rechercher</button>
