@@ -19,28 +19,32 @@ function IDresearch(id) {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        const template = document
-          .getElementById("animeTemplate")
-          .content.cloneNode(true);
-        template.querySelector("#animeTitle").textContent = data.title;
-        template.querySelector("#animeImage").src = data.image;
-        template.querySelector("#animeDescription").innerHTML =
-          "<b>Synopsis: </b></br>" + data.synopsis;
-        if (data.genres.length === 0) {
-          template.querySelector("#animeGenre").innerHTML =
-            "<b>Genres: </b>N/A";
-        } else {
-          template.querySelector("#animeGenre").innerHTML =
-            "<b>Genres: </b></br>" + data.genres.join(", ");
-        }
-        template.querySelector("#animeRank").innerHTML =
-          "<b>Rank: </b>" + data.ranking;
-        template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + data._id;
-
-        document.body.appendChild(template);
+        showId(data);
       });
   } catch (error) {
     console.error(error);
   }
+}
+
+function showId(data){
+  console.log(data);
+  const template = document
+    .getElementById("animeTemplate")
+    .content.cloneNode(true);
+  template.querySelector("#animeTitle").textContent = data.title;
+  template.querySelector("#animeImage").src = data.image;
+  template.querySelector("#animeDescription").innerHTML =
+    "<b>Synopsis: </b></br>" + data.synopsis;
+  if (data.genres.length === 0) {
+    template.querySelector("#animeGenre").innerHTML =
+      "<b>Genres: </b>N/A";
+  } else {
+    template.querySelector("#animeGenre").innerHTML =
+      "<b>Genres: </b></br>" + data.genres.join(", ");
+  }
+  template.querySelector("#animeRank").innerHTML =
+    "<b>Rank: </b>" + data.ranking;
+  template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + data._id;
+
+  document.body.appendChild(template);
 }
