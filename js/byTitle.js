@@ -33,8 +33,13 @@ function showAnimeAtTitle(researchName, api_key) {
         });
 
         // Handle the API response structure properly
-        let tabtemp = data.data;
-
+        let tabtemp = Array.isArray(data.data) ? data.data : [data];
+        if(!tabtemp || tabtemp.length === 0){
+          
+          showTitleNotFound();
+          return ;
+        }
+        alert("Number of results: " + tabtemp.length);
         tabtemp.forEach((anime) => {
           const template = document
             .getElementById("animeTemplate")
@@ -84,4 +89,13 @@ function showTitle(researchName, api_key) {
   } else {
     showAnimeAtTitle(researchName, api_key);
   }
+}
+
+function showTitleNotFound(){
+  const template = document
+    .getElementById("animeTemplate")
+    .content.cloneNode(true);
+  template.querySelector("#animeTitle").textContent = "Not Found";
+  template.querySelector("#animeImage").alt = "";
+  document.body.appendChild(template);
 }
