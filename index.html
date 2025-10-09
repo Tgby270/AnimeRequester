@@ -37,20 +37,20 @@
             <select id="searchType" name="searchType" required>
                 <option value="" disabled selected>Sélectionnez un type de recherche</option>
                 <option value="titleSearch">Recherche par titre</option>
-                <option value="IDSearch">Recherche par ID</option>
-                <option value="rankSearch">Recherche par rang</option>
-                <option value="genreSearch">Recherche par genre</option>
-                <option value="genreList">Liste des genres</option>
+                    <option value="IDSearch">Recherche par ID</option>
+                    <option value="rankSearch">Recherche par rang</option>
+                    <option value="genreSearch">Recherche par genre</option>
+                    <option value="genreList">Liste des genres</option>
             </select>
         </div>
 
         <div class="search">
-            <label for="param">Paramètres:</label>
+            <label id="paramLabel" for="param">Paramètres:</label>
             <input type="text" id="param" name="param">
         </div>
 
-        <div class="search" id="genreContainer">
-            <label id="genresLab" style="display: none;">Genres:</label>
+        <div class="search" id="genreContainer" style="display: none;">
+            <label id="genresLab">Genres:</label>
             <div id="genrediv" class="genre-grid"></div>
         </div>
 

@@ -18,7 +18,7 @@ form.addEventListener("submit", (event) => {
     const formData = new FormData(form);
     const searchType = formData.get("searchType");
     const searchValue = formData.get("param"); // Changé de "searchValue" à "param"
-    
+
     switch(searchType){
         case "titleSearch":
             console.log("Title search for: " + searchValue);
@@ -33,7 +33,7 @@ form.addEventListener("submit", (event) => {
             showRank(searchValue, window.sessionStorage.getItem("api_key"));
             break;
         case "genreSearch":
-            // hassoul
+            showByGenres();
             break;
         case "genreList":
             // hassoul
