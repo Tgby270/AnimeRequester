@@ -8,7 +8,7 @@ options = {
     };
 
 /**
- * Fetch the list of genres from the API.
+ * Call the API to get the list of genres.
  * @returns {Promise<Array>} A promise that resolves to an array of genres.
  * @throws {Error} If the fetch operation fails.
  */
@@ -25,8 +25,10 @@ async function getGenresList(){
 }
 
 /**
- * Show the list of genres as checkboxes in the UI.
- * @throws {Error} If there is an error fetching or displaying genres.
+ * Create and display checkboxes (and their labels) for each genre.
+ * Checkboxes are added to the template and displayed in the UI.
+ * The parameter input field is hidden when genres are displayed for a more user-friendly experience.
+ * This function is called when the user selects the "search by genre" option.
  */
 async function showGenres() {
     try {
@@ -63,7 +65,8 @@ async function showGenres() {
 }
 
 /**
- * Hide the genres section in the UI.
+ * Hide the genre checkboxes and shows the parameter input field.
+ * This function is called when the user switches back to a search type that requires a parameter input.
  */
 function hideGenres() {
     lab = document.getElementById('genreContainer');
@@ -77,7 +80,7 @@ function hideGenres() {
 }
 
 /**
- * Get the selected genres from the checkboxes.
+ * Saves every checked genre in an array and returns it.
  * @returns {Array} An array of selected genre values.
  */
 function getSelectedGenres() {
@@ -110,7 +113,7 @@ async function getResultsByGenres() {
 }
 
 /**
- * Display anime results based on selected genres.
+ * Get the result of getResultsByGenres and display the anime results in the UI.
  * @throws {Error} If there is an error fetching or displaying results.
  */
 async function showByGenres() {
