@@ -2,6 +2,15 @@ const form = document.getElementById("requestForm");
 const reset = document.getElementById("reset");
 
 
+searchType = document.getElementById("searchType");
+searchType.addEventListener("change", (event) => {
+    if (event.target.value === "genreSearch") {
+        showGenres();
+    } else {
+        hideGenres();
+    }
+});
+
 form.addEventListener("submit", (event) => {
     event.preventDefault(); // Empêche le rechargement de la page
     
