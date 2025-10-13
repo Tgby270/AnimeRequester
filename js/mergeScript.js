@@ -16,11 +16,11 @@ form.addEventListener("submit", (event) => {
     const formData = new FormData(form);
     const searchValue = formData.get("param"); // Changé de "searchValue" à "param"
     
-    fetching(searchValue);
+    getData(searchValue);
 });
 
 
-function fetching(searchValue) {
+function getData(searchValue) {
     switch(document.getElementById("searchType").value){
         case "titleSearch":
             url = "https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=" + searchValue + "&sortBy=ranking&sortOrder=asc"; 
@@ -45,6 +45,7 @@ function fetching(searchValue) {
     return fetch(url, options)
         .then((response) => {
             if (!response.ok) {
+                showNotFound();
                 throw new Error('Network response was not ok: ' + response.statusText);
             }
             return response.json();
@@ -53,33 +54,52 @@ function fetching(searchValue) {
             //console.log("API Response:", data);
             
             // Pour une recherche par rang, l'API retourne directement un objet anime
-            // Donc on crée un tableau avec cet objet
+            // Donc on créé un tableau avec cet objet
             let tabtemp = Array.isArray(data) ? data : [data];
             if(!tabtemp || tabtemp.length === 0){
+                showNotFound();
                 alert("No results found.");
                 return ;
             } else {
-                show(tabtemp);
+                show(tabtemp, document.getElementById("searchType").value);
             }
         });
 }
 
-function show(tabtemp){
-    tabtemp.forEach(anime => {
+function show(tabtemp, searchType){
+    if(!tabtemp || tabtemp.length === 0){
+        showNotFound();
+        return ;
+    }
 
-        const animeShow = document.getElementById("animeShow");
-
-        if( animeShow ){
-          document.body.removeChild(animeShow); 
+    if(searchType === "titleSearch")
+    {
+        console.log(tabtemp);
+        tabtemp = tabtemp[0].data;
+        console.log(tabtemp);
+        if(!tabtemp || tabtemp.length === 0){
+            showNotFound();
+            return ;
         }
-       
+    }
+    console.table(tabtemp);
 
+    const animeShow = document.getElementById("animeShow");
+
+    if( animeShow ){
+      document.body.removeChild(animeShow); 
+    }
+
+    tabtemp.forEach(anime => {        
+        
+         // Clear existing anime show if present
+        
         const template = document.getElementById("animeTemplate").content.cloneNode(true);
 
         template.querySelector("#animeTitle").textContent = anime.title;
         template.querySelector("#animeImage").src = anime.image;
         template.querySelector("#animeDescription").innerHTML = "<b>Synopsis: </b></br>" + anime.synopsis;
-        if(anime.genres.length === 0) {
+        if(!anime.genres || anime.genres.length === 0) {
           template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b>N/A";
         } 
         else {
@@ -95,3 +115,12 @@ function show(tabtemp){
 reset.addEventListener("click", (event) => {
     window.location.reload();
 });
+
+function showNotFound(){
+    const template = document
+      .getElementById("animeTemplate")
+      .content.cloneNode(true);
+    template.querySelector("#animeTitle").textContent = "Not Found";
+    template.querySelector("#animeImage").alt = "";
+    document.body.appendChild(template);
+  }
