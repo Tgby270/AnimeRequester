@@ -84,15 +84,16 @@ function show(tabtemp, searchType){
     }
     console.table(tabtemp);
 
-    const animeShow = document.getElementById("animeShow");
+    /*const animeShow = document.getElementById("animeShow");
 
     if( animeShow ){
       document.body.removeChild(animeShow); 
-    }
+    }*/
+    destroyTemplate();
+      
 
     tabtemp.forEach(anime => {        
         
-         // Clear existing anime show if present
         
         const template = document.getElementById("animeTemplate").content.cloneNode(true);
 
@@ -116,7 +117,17 @@ reset.addEventListener("click", (event) => {
     window.location.reload();
 });
 
+function destroyTemplate(){
+    const animeShowed = document.querySelectorAll("#animeShow");
+    animeShowed.forEach((anime) => {
+      if (anime.parentNode) {
+        anime.parentNode.removeChild(anime);
+      }
+    });
+}
+
 function showNotFound(){
+    destroyTemplate();
     const template = document
       .getElementById("animeTemplate")
       .content.cloneNode(true);
