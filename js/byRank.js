@@ -177,7 +177,13 @@ function showAnimeAtRank(_researchNumber) {
 
   try {
 	  fetch(url, options)
-        .then(response => response.json())
+        .then(response => {
+          if(!response.ok) {
+            showRankNotFound();
+          } else {
+            return response.json()
+          }
+        })
         .then(data => {
           //console.log("API Response:", data);
           
@@ -224,7 +230,13 @@ function showAnimeByRank(options) {
 
   try {
 	  fetch(url, options)
-        .then(response => response.json())
+        .then(response => {
+          if(!response.ok) {
+            showRankNotFound();
+          } else {
+            return response.json()
+          }
+        })
         .then(data => {
           
           //console.log("API Response:", data);
@@ -280,4 +292,13 @@ function showRank(researchNumber, api_key){
     changeURLAtRank(researchNumber);
     showAnimeAtRank(researchNumber);
   }
+}
+
+function showRankNotFound(){
+  const template = document
+    .getElementById("animeTemplate")
+    .content.cloneNode(true);
+  template.querySelector("#animeTitle").textContent = "Not Found";
+  template.querySelector("#animeImage").alt = "";
+  document.body.appendChild(template);
 }

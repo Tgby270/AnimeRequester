@@ -3,7 +3,7 @@ function IDresearch(id, api_key) {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": api_key,
+      "x-rapidapi-key": api_key, // ea73e965f1mshdf06bb0c4f075d8p14f93djsne0faf0bc3c19
       "x-rapidapi-host": "anime-db.p.rapidapi.com",
     },
   };
@@ -16,10 +16,14 @@ function IDresearch(id, api_key) {
   try {
     fetch(urlById, options)
       .then((response) => {
-        return response.json();
+        if(!response.ok){
+          showIdNotFound();
+        } else {
+          return response.json();
+        }
       })
       .then((data) => {
-        showId(data);
+          showId(data);
       });
   } catch (error) {
     console.error(error);
@@ -47,5 +51,14 @@ function showId(data){
   template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + data._id;
   template.querySelector("#nbEpisodes").innerHTML =
   "<b>Number of Episodes: </b>" + data.episodes;
+  document.body.appendChild(template);
+}
+
+function showIdNotFound(){
+  const template = document
+    .getElementById("animeTemplate")
+    .content.cloneNode(true);
+  template.querySelector("#animeTitle").textContent = "Not Found";
+  template.querySelector("#animeImage").alt = "";
   document.body.appendChild(template);
 }
