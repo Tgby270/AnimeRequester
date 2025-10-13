@@ -1,45 +1,48 @@
+///////////////////////////////////////////////////////////////////////////////
+// --------------------------- Theme (Dark/Light) ---------------------------//
+///////////////////////////////////////////////////////////////////////////////
 
-// Dropdown functionality
-const settingsButton = document.getElementById("settingsButton");
-const dropdown = document.querySelector(".dropdown");
-
-let lightstatus = "LIGHT";
-
-settingsButton.addEventListener("click", (event) => {
-    event.stopPropagation();
-    dropdown.classList.toggle("active");
-});
-
-// Close dropdown when clicking outside
-document.addEventListener("click", (event) => {
-    if (!dropdown.contains(event.target)) {
-        dropdown.classList.remove("active");
+/**
+ * applyTheme(theme)
+ * - Ajoute ou enlève la classe CSS 'dark-theme'
+ * - La classe 'dark-theme' active les variables CSS pour le mode sombre
+ */
+ function applyTheme(theme) {
+    const htmlElement = document.documentElement;
+    if(theme === 'DARK') {
+        htmlElement.classList.add('dark-theme');
+    } else {
+        htmlElement.classList.remove('dark-theme');
     }
-});
+}
 
-// Handle dropdown menu items
-document.getElementById("themeToggle").addEventListener("click", (e) => {
-    e.preventDefault();
+/**
+ * initTheme()
+ * - Initialise le thème au chargement de la page :
+ * - Thème clair par défaut
+ */
+function initTheme() {
+    // Applique le theme sur la page
+    applyTheme('LIGHT');
+}
+
+/**
+ * Gestionnaire clic sur le bouton de thème
+ * -check la nouvelle valeur de la checkbox
+ * - Bascule l'état
+ * - Applique le thème
+ */
+document.getElementById("themeToggleCheckbox").addEventListener("change", (e) => {
     
-    alert("Changement de thème - À implémenter");
-    dropdown.classList.remove("active");
+    const checked = e.target.checked;
+
+    // Bascule entre LIGHT et DARK 
+    currentTheme = checked ? 'DARK' : 'LIGHT';
+
+    // Appliquer et sauvegarder
+    applyTheme(currentTheme);
+
 });
 
-document.getElementById("languageToggle").addEventListener("click", (e) => {
-    e.preventDefault();
-    
-    if(lightstatus == "LIGHT") {//si dejas dark mode mettre en light mode
-        
-
-        
-        lightstatus = "DARK";
-    } else {//si pas dark mode mettre en dark mode
-
-
-
-        lightstatus = "LIGHT";
-    }
-
-    alert("Changement de langue - À implémenter");
-    dropdown.classList.remove("active");
-});
+// Initialisation du thème lorsque le DOM est prêt
+document.addEventListener('DOMContentLoaded', initTheme);
