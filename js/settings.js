@@ -13,7 +13,7 @@
         htmlElement.classList.add('dark-theme');
     } else {
         htmlElement.classList.remove('dark-theme');
-    }
+    } 
 }
 
 /**
