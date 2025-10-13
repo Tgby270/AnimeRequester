@@ -1,9 +1,21 @@
+import { showGenres, hideGenres, getSelectedGenres } from './getGenre.js';
+
+    if(window.sessionStorage.getItem("api_key") == null){
+        console.log("No API key found in session storage, setting new key.");
+         //request api key
+        let api_key = prompt("Veuillez entrer votre clé API:");
+        window.sessionStorage.setItem("api_key", api_key);
+        console.log("API key stored : " + window.sessionStorage.getItem("api_key"));
+    }
+
+
+let url = "";
+let genresSearch = "";
 const form = document.getElementById("requestForm");
 const reset = document.getElementById("reset");
 
-
-searchType = document.getElementById("searchType");
-searchType.addEventListener("change", (event) => {
+let typeSearch = document.getElementById("searchType");
+typeSearch.addEventListener("change", (event) => {
     if (event.target.value === "genreSearch") {
         showGenres();
     } else {
@@ -11,45 +23,131 @@ searchType.addEventListener("change", (event) => {
     }
 });
 
+
 form.addEventListener("submit", (event) => {
     event.preventDefault(); // Empêche le rechargement de la page
-    
-   
-
-    if(window.sessionStorage.getItem("api_key") == null){
-        console.log("No API key found in session storage, setting new key.");
-         //request api key
-        api_key = prompt("Veuillez entrer votre clé API:");
-        window.sessionStorage.setItem("api_key", api_key);
-        console.log("API key stored : " + window.sessionStorage.getItem("api_key"));
-    }
+    let url = "";
 
     const formData = new FormData(form);
-    const searchType = formData.get("searchType");
     const searchValue = formData.get("param"); // Changé de "searchValue" à "param"
+    
+    getData(searchValue);
+});
 
-    switch(searchType){
+
+function getData(searchValue) {
+    switch(document.getElementById("searchType").value){
         case "titleSearch":
-            console.log("Title search for: " + searchValue);
-            showTitle(searchValue, window.sessionStorage.getItem("api_key"));
+            url = "https://anime-db.p.rapidapi.com/anime?page=1&size=10&search=" + searchValue + "&sortBy=ranking&sortOrder=asc"; 
             break;
         case "IDSearch":
-            console.log("Title search for: " + searchValue);
-            IDresearch(searchValue, window.sessionStorage.getItem("api_key"));
+            url = "https://anime-db.p.rapidapi.com/anime/by-id/" + searchValue; 
             break;
         case "rankSearch":
-            console.log("Rank search for: " + searchValue);
-            showRank(searchValue, window.sessionStorage.getItem("api_key"));
+            url = "https://anime-db.p.rapidapi.com/anime/by-ranking/" + searchValue; 
             break;
         case "genreSearch":
-            showByGenres();
-            break;
-        case "genreList":
-            // hassoul
+            const selectedGenres = getSelectedGenres();
+            genresSearch = selectedGenres.join('%2C');
+            genresSearch = genresSearch.replaceAll(' ', '%20');
+            console.log("Selected genres:", genresSearch);
+            url = `https://anime-db.p.rapidapi.com/anime?genres=${genresSearch}&page=1&size=20&sortBy=ranking&sortOrder=asc`;
             break;
     }
-});
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': window.sessionStorage.getItem("api_key"),
+            'x-rapidapi-host': 'anime-db.p.rapidapi.com'
+        }
+    };
+    return fetch(url, options)
+        .then((response) => {
+            if (!response.ok) {
+                showNotFound();
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            //console.log("API Response:", data);
+            
+            // Pour une recherche par rang, l'API retourne directement un objet anime
+            // Donc on créé un tableau avec cet objet
+            let tabtemp = Array.isArray(data) ? data : [data];
+            if(!tabtemp || tabtemp.length === 0){
+                showNotFound();
+                alert("No results found.");
+                return ;
+            } else {
+                show(tabtemp, document.getElementById("searchType").value);
+            }
+        });
+}
+
+function show(tabtemp, searchType){
+    if(!tabtemp || tabtemp.length === 0){
+        showNotFound();
+        return ;
+    }
+
+    if(searchType === "titleSearch" || searchType === "genreSearch")
+    {
+        console.log(tabtemp);
+        tabtemp = tabtemp[0].data;
+        console.log(tabtemp);
+        if(!tabtemp || tabtemp.length === 0){
+            showNotFound();
+            return ;
+        }
+    }
+    console.table(tabtemp);
+
+
+
+    destroyTemplate();
+      
+
+    tabtemp.forEach(anime => {        
+        
+        
+        const template = document.getElementById("animeTemplate").content.cloneNode(true);
+
+        template.querySelector("#animeTitle").textContent = anime.title;
+        template.querySelector("#animeImage").src = anime.image;
+        template.querySelector("#animeDescription").innerHTML = "<b>Synopsis: </b></br>" + anime.synopsis;
+        if(!anime.genres || anime.genres.length === 0) {
+          template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b>N/A";
+        } 
+        else {
+          template.querySelector("#animeGenre").innerHTML = "<b>Genres: </b></br>" + anime.genres.join(", ");
+        }
+        template.querySelector("#animeRank").innerHTML = "<b>Rank: </b>" + anime.ranking;
+        template.querySelector("#animeID").innerHTML = "<b>ID: </b>" + anime._id;
+
+        document.body.appendChild(template);
+    });
+}
 
 reset.addEventListener("click", (event) => {
     window.location.reload();
 });
+
+function destroyTemplate(){
+    const animeShowed = document.querySelectorAll("#animeShow");
+    animeShowed.forEach((anime) => {
+      if (anime.parentNode) {
+        anime.parentNode.removeChild(anime);
+      }
+    });
+}
+
+function showNotFound(){
+    destroyTemplate();
+    const template = document
+      .getElementById("animeTemplate")
+      .content.cloneNode(true);
+    template.querySelector("#animeTitle").textContent = "Not Found";
+    template.querySelector("#animeImage").alt = "";
+    document.body.appendChild(template);
+  }
