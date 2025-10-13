@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,32 +8,36 @@
     <script src="JS/byRank.js" defer></script>
     <script src="JS/script.js" defer></script>
     <script src="JS/settings.js" defer></script>
-    <script src="js/byTitle.js" defer></script>
-    <script src="js/byID.js" defer></script>
-    <script src="js/getGenre.js" defer></script>
     <title>AnimeRequester</title>
 </head>
 
-<div id="settings">
-    <div class="dropdown">
-        <button id="settingsButton" class="dropdown-btn" title="Settings">
-            <i class="fa-solid fa-gear"></i>
-            <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div id="settingsMenu" class="dropdown-content">
-            <button id="themeToggle">Dark Mode</button>
-            <button id="languageToggle">Langue</button>
-        </div>
+    <div id="settings">
+        <!--<div class="dropdown">
+            <button id="settingsButton" class="dropdown-btn">
+                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div id="settingsMenu" class="dropdown-content">
+                <button id="themeToggle">Dark Mode</button>
+                <button id="languageToggle">Langue</button>
+            </div>
+        </div>-->
+        <label class="switch" title="Toggle theme">
+            <input type="checkbox" id="themeToggleCheckbox" aria-label="Activer le mode sombre">
+            <span class="slider">
+                <span class="icon sun"><i class="fa-solid fa-sun"></i></span>
+                <span class="icon moon"><i class="fa-solid fa-moon" style="color: #FFD43B;"></i></span>
+            </span>
+        </label>
     </div>
-</div>
 
-<h1>ANIME REQUESTER</h1>
+    <h1>ANIME REQUESTER</h1>
 
-<div id="limit">
-    <form id="requestForm">
-        <div class="search">
+    <div id="limit">
+    <form id = "requestForm">
+        <div class = "search">
             <label for="searchType">Choisissez un type de recherche:</label>
-            <select id="searchType" name="searchType" required>
+            <select id = "searchType" name="searchType" required>
                 <option value="" disabled selected>Sélectionnez un type de recherche</option>
                 <option value="titleSearch">Recherche par titre</option>
                 <option value="IDSearch">Recherche par ID</option>
@@ -43,51 +46,37 @@
                 <option value="genreList">Liste des genres</option>
             </select>
         </div>
-
-        <div class="search">
+        <div class = "search">
             <label for="param">Paramètres:</label>
-            <input type="text" id="param" name="param">
+            <input type="text" id="param" name="param" >
         </div>
-
-        <div class="search" id="genreContainer">
-            <label id="genresLab" style="display: none;">Genres:</label>
-            <div id="genrediv" class="genre-grid"></div>
-        </div>
-
-        <template id="genreTemplate">
-            <div class="genre-item">
-                <input type="checkbox" class="genre-checkbox">
-                <label class="genre-label"></label>
-            </div>
-        </template>
-
-        <div id="buttonSection">
-            <button type="submit" id="search">Rechercher</button>
-            <button type="button" id="reset">Réinitialiser</button>
+        <div id = "buttonSection">
+            <button type="submit" id = "search">Rechercher</button>
+            <button type="button" id = "reset">Réinitialiser</button>
         </div>
     </form>
 
-</div>
-
-<template id="animeTemplate">
-    <div id="animeShow">
-        <h2 id="animeTitle"></h2>
-        <div class="inrow">
-            <div id="animeCard">
-                <img id="animeImage" src="" alt="Anime Image">
-                <div id="details">
-                    <p id="animeRank"></p>
-                    <p id="animeID"></p>
-                    <p id="nbEpisodes"></p>
+    <template id="animeTemplate">
+        <div id="animeShow">
+            <h2 id="animeTitle"></h2>
+            <div class="inrow">
+                <div id="animeCard">
+                    <img id="animeImage" src="" alt="Anime Image">
+                    <div id = "details">
+                        <p id="animeRank"></p>
+                        <p id="animeID"></p>
+                    </div>
+                </div>
+                <div id="animeInfos">
+                    <p id="animeGenre"></p>
+                    <p id="animeDescription"></p>
                 </div>
             </div>
-            <div id="animeInfos">
-                <p id="animeGenre"></p>
-                <p id="animeDescription"></p>
-            </div>
         </div>
-    </div>
-</template>
-</body>
+    </template>
 
+    
+
+</div>
+</body>
 </html>
