@@ -1,42 +1,83 @@
-/* --------------------------- Themes --------------------------- */
-
-:root { /* Default (light) theme variables */
-    --brand-color: #007bff;
-    --brand-color-hover: #0056b3;
-    --body-background: #f4f4f4;
-    --text-color: #222222;
-    --form-bg: #ffffff;
-    --card-bg: #ffffff;
-    --border-color: rgb(159, 159, 159);
-    --knob-bg: #434242; /* #aeb0b2 */
-    --slider-bg: #ffffff;
-    --slider-border: #b0b0b0;
-}
-
-.dark-theme {
-    --brand-color: #6c7ae0;
-    --brand-color-hover: #5560b0;
-    --body-background: #343a40;
-    --text-color: #e6e6e6;
-    --form-bg: #2d2d2d;
-    --card-bg: #2d2d2d;
-    --border-color: #555555;
-    --knob-bg: #ffffff;
-    --slider-bg: #4a4a4a;
-    --slider-border: #666666;
-}
-
-
-
-
-
-/* ------------------------ General Styles ------------------------ */
-
 body{
     font-family: Arial, sans-serif;
-    background-color: var(--body-background);
-    color: var(--text-color);
+    background-color: #f4f4f4;
 }
+
+
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-btn:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 100px;
+    max-width: 150px;
+    white-space: nowrap;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    color: #333 !important;
+    padding: 12px 16px;
+    text-decoration: none !important;
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #e9ecef !important;
+    color: #007bff !important;
+}
+
+.dropdown-content a:visited,
+.dropdown-content a:link {
+    color: #333 !important;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+
+
 
 h1{
     text-align: center;
@@ -53,7 +94,7 @@ form{
     margin-left: auto;
     margin-right: auto;
     border: 1px solid rgb(159, 159, 159);
-    background-color: var(--body-background);
+    background-color: #ffffff;
     border-radius: 14px;
     width: 55%;
     padding: 2em;
@@ -117,7 +158,7 @@ form{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-color: var(--body-background);
+    background-color: #fff;
     border: 1px solid rgb(159, 159, 159);
     border-radius: 8px;
     padding: 2em;
@@ -195,62 +236,5 @@ form{
     padding: 8px 10px;
     border:1px solid #ccc;
     border-radius:6px;
-    background: var(--body-background);
-}
-
-
-/*///////////////////////////////////////////////////////////////*/
-/*------------------------ Theme Switch ------------------------ */
-/*///////////////////////////////////////////////////////////////*/
-
-.switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-.switch input { display: none; }
-
-/* slider background */
-.switch .slider {
-  position: relative;
-  width: 52px;
-  height: 28px;
-  background: var(--slider-bg);
-  border: 1px solid var(--slider-border);
-  border-radius: 999px;
-  padding: 3px;
-  box-sizing: border-box;
-}
-
-/* icons */
-.switch .slider .icon {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-.switch .slider .sun { left: 4px; color: #f1c40f; }
-.switch .slider .moon { right: 4px; color: #8e44ad; }
-
-/* knob */
-.switch .slider::after{
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 22px;
-  height: 22px;
-  background: var(--knob-bg);
-  border-radius: 50%;
-  transition: transform .22s ease, background .22s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,.2);
-}
-
-/* checked -> move knob to right and change color */
-.switch input:checked + .slider::after {
-  transform: translateX(24px);
+    background:#fafafa;
 }

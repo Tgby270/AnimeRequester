@@ -22,60 +22,60 @@
     <h1>ANIME REQUESTER</h1>
 
     <div id="limit">
-    <form id = "requestForm">
-        <div class = "search">
-            <label for="searchType">Choisissez un type de recherche:</label>
-            <select id = "searchType" name="searchType" required>
-                <option value="" disabled selected>Sélectionnez un type de recherche</option>
-                <option value="titleSearch">Recherche par titre</option>
-                    <option value="IDSearch">Recherche par ID</option>
-                    <option value="rankSearch">Recherche par rang</option>
-                    <option value="genreSearch">Recherche par genre</option> 
-            </select>
-        </div>
-
-        <div class="search">
-            <label id="paramLabel" for="param">Paramètres:</label>
-            <input type="text" id="param" name="param">
-        </div>
-
-        <div class="search" id="genreContainer" style="display: none;">
-            <label id="genresLab">Genres:</label>
-            <div id="genrediv" class="genre-grid"></div>
-        </div>
-
-        <template id="genreTemplate">
-            <div class="genre-item">
-                <input type="checkbox" class="genre-checkbox">
-                <label class="genre-label"></label>
+        <form id = "requestForm">
+            <div class = "search">
+                <label for="searchType">Choisissez un type de recherche:</label>
+                <select id = "searchType" name="searchType" required>
+                    <option value="" disabled selected>Sélectionnez un type de recherche</option>
+                    <option value="titleSearch">Recherche par titre</option>
+                        <option value="IDSearch">Recherche par ID</option>
+                        <option value="rankSearch">Recherche par rang</option>
+                        <option value="genreSearch">Recherche par genre</option> 
+                </select>
             </div>
-        </template>
 
-        <div id="buttonSection">
-            <button type="submit" id="search">Rechercher</button>
-            <button type="button" id="reset">Réinitialiser</button>
-        </div>
-    </form>
+            <div class="search">
+                <label id="paramLabel" for="param">Paramètres:</label>
+                <input type="text" id="param" name="param">
+            </div>
 
-    <template id="animeTemplate">
-        <div id="animeShow">
-            <h2 id="animeTitle"></h2>
-            <div class="inrow">
-                <div id="animeCard">
-                    <img id="animeImage" src="" alt="Anime Image">
-                    <div id = "details">
-                        <p id="animeRank"></p>
-                        <p id="animeID"></p>
+            <div class="search" id="genreContainer" style="display: none;">
+                <label id="genresLab">Genres:</label>
+                <div id="genrediv" class="genre-grid"></div>
+            </div>
+
+            <template id="genreTemplate">
+                <div class="genre-item">
+                    <input type="checkbox" class="genre-checkbox">
+                    <label class="genre-label"></label>
+                </div>
+            </template>
+
+            <div id="buttonSection">
+                <button type="submit" id="search">Rechercher</button>
+                <button type="button" id="reset">Réinitialiser</button>
+            </div>
+        </form>
+
+        <template id="animeTemplate">
+            <div id="animeShow">
+                <h2 id="animeTitle"></h2>
+                <div class="inrow">
+                    <div id="animeCard">
+                        <img id="animeImage" src="" alt="Anime Image">
+                        <div id = "details">
+                            <p id="animeRank"></p>
+                            <p id="animeID"></p>
+                        </div>
+                    </div>
+                    <div id="animeInfos">
+                        <p id="animeGenre"></p>
+                        <p id="animeDescription"></p>
                     </div>
                 </div>
-                <div id="animeInfos">
-                    <p id="animeGenre"></p>
-                    <p id="animeDescription"></p>
-                </div>
             </div>
-        </div>
-    </template>
-</div>
+        </template>
+    </div>
 <script type="module" src="js/script.js"></script>
 </body>
 </html>

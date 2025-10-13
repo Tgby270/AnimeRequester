@@ -34,7 +34,11 @@ form.addEventListener("submit", (event) => {
     getData(searchValue);
 });
 
-
+/**
+ * Fetch anime data based on the search type and the value provided by the user.
+ * @param {*} searchValue value provided by the user
+ * @returns null if no results found
+ */
 function getData(searchValue) {
     switch(document.getElementById("searchType").value){
         case "titleSearch":
@@ -85,6 +89,12 @@ function getData(searchValue) {
         });
 }
 
+/**
+ * Show the anime data on the page.
+ * @param {*} tabtemp table of data to show
+ * @param {*} searchType type of search done
+ * @returns 
+ */
 function show(tabtemp, searchType){
     if(!tabtemp || tabtemp.length === 0){
         showNotFound();
